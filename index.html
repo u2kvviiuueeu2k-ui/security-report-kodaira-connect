@@ -60,7 +60,8 @@
     .score-ring .score-num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .score-num .num { font-size: 3.2rem; font-weight: 900; color: var(--red); line-height: 1; }
     .score-num .denom { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
-    .grade-badge { display: inline-block; background: rgba(255,59,92,0.15); border: 1.5px solid var(--red); border-radius: 12px; padding: 6px 24px; font-size: 1.3rem; font-weight: 900; color: var(--red); margin-bottom: 28px; }
+    .grade-badge { display: inline-block; background: rgba(255,59,92,0.15); border: 1.5px solid var(--red); border-radius: 12px; padding: 6px 24px; font-size: 1.3rem; font-weight: 900; color: var(--red); margin-bottom: 14px; }
+    .score-breakdown { font-size: 0.7rem; color: rgba(255,255,255,0.35); letter-spacing: 0.02em; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; }
     .count-grid { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
     .count-pill { display: flex; flex-direction: column; align-items: center; padding: 12px 18px; border-radius: 16px; min-width: 68px; }
     .count-pill .n { font-size: 1.8rem; font-weight: 900; line-height: 1; }
@@ -162,7 +163,7 @@
     .cta-title { font-size: 2.4rem; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 18px; }
     .cta-title .accent { color: var(--green); }
     .cta-body { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.85; margin-bottom: 28px; }
-    .cta-btn { display: inline-block; background: var(--green); color: #0d0d0d; font-weight: 900; font-size: 0.85rem; padding: 13px 34px; border-radius: 100px; text-decoration: none; letter-spacing: 0.04em; }
+    .cta-btn { display: inline-block; background: #00F5A0; color: #000; font-weight: bold; font-size: 0.85rem; padding: 16px 40px; border-radius: 8px; text-decoration: none; letter-spacing: 0.04em; }
     .powered { margin-top: 18px; font-size: 0.58rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; text-transform: uppercase; }
 
     /* DISCLAIMER */
@@ -206,6 +207,7 @@
           </div>
         </div>
         <div class="grade-badge">グレード D — 危険・要緊急対応</div>
+        <p class="score-breakdown">100 − 20×1（Critical）− 10×2（High）− 5×3（Medium）− 2×1（Low）＝ 43点</p>
         <div class="count-grid">
           <div class="count-pill pill-critical"><span class="n">1</span><span class="l">Critical</span></div>
           <div class="count-pill pill-high"><span class="n">2</span><span class="l">High</span></div>
