@@ -6,7 +6,7 @@
   <title>Kodaira Connect セキュリティ診断レポート | Alnair</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
   <style>
@@ -18,23 +18,22 @@
       --blue:   #118ab2;
       --dark:   #0d0d0d;
       --card:   #161616;
+      --card2:  #1c1c1c;
       --border: rgba(255,255,255,0.08);
     }
-
     .reveal-viewport { background: var(--dark); }
     .reveal .slides section { font-family: 'Inter', 'Noto Sans JP', sans-serif; }
     .reveal h1, .reveal h2, .reveal h3 { font-family: 'Inter', 'Noto Sans JP', sans-serif; letter-spacing: -0.02em; }
 
-    /* ===== SLIDE BASE ===== */
     .slide-inner {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 60px;
+      padding: 0 56px;
     }
 
-    /* ===== COVER ===== */
+    /* COVER */
     .cover-badge {
       display: inline-flex;
       align-items: center;
@@ -50,313 +49,124 @@
       text-transform: uppercase;
       margin-bottom: 28px;
     }
-    .cover-title {
-      font-size: 2.6rem;
-      font-weight: 900;
-      line-height: 1.15;
-      color: #fff;
-      margin: 0 0 20px;
-    }
+    .cover-title { font-size: 2.6rem; font-weight: 900; line-height: 1.15; color: #fff; margin: 0 0 20px; }
     .cover-title span { color: var(--red); }
-    .cover-meta {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.06em;
-    }
+    .cover-meta { font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.04em; line-height: 1.9; }
     .cover-meta strong { color: rgba(255,255,255,0.6); }
 
-    /* ===== SCORE SLIDE ===== */
-    .score-ring {
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 32px;
-      position: relative;
-    }
+    /* SCORE */
+    .score-ring { width: 180px; height: 180px; margin: 0 auto 28px; position: relative; }
     .score-ring svg { transform: rotate(-90deg); }
-    .score-ring .score-num {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .score-num .num {
-      font-size: 3.2rem;
-      font-weight: 900;
-      color: var(--red);
-      line-height: 1;
-    }
+    .score-ring .score-num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .score-num .num { font-size: 3.2rem; font-weight: 900; color: var(--red); line-height: 1; }
     .score-num .denom { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
-    .grade-badge {
-      display: inline-block;
-      background: rgba(255,59,92,0.15);
-      border: 1.5px solid var(--red);
-      border-radius: 12px;
-      padding: 6px 24px;
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: var(--red);
-      margin-bottom: 32px;
-    }
-    .count-grid {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .count-pill {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 12px 20px;
-      border-radius: 16px;
-      min-width: 72px;
-    }
+    .grade-badge { display: inline-block; background: rgba(255,59,92,0.15); border: 1.5px solid var(--red); border-radius: 12px; padding: 6px 24px; font-size: 1.3rem; font-weight: 900; color: var(--red); margin-bottom: 28px; }
+    .count-grid { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .count-pill { display: flex; flex-direction: column; align-items: center; padding: 12px 18px; border-radius: 16px; min-width: 68px; }
     .count-pill .n { font-size: 1.8rem; font-weight: 900; line-height: 1; }
-    .count-pill .l { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; margin-top: 4px; opacity: 0.8; }
+    .count-pill .l { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; margin-top: 4px; opacity: 0.8; }
     .pill-critical { background: rgba(255,59,92,0.15); border: 1px solid rgba(255,59,92,0.4); color: var(--red); }
     .pill-high     { background: rgba(255,140,66,0.15); border: 1px solid rgba(255,140,66,0.4); color: var(--orange); }
     .pill-medium   { background: rgba(255,209,102,0.15); border: 1px solid rgba(255,209,102,0.4); color: var(--yellow); }
-    .pill-low      { background: rgba(6,214,160,0.15);  border: 1px solid rgba(6,214,160,0.4);  color: var(--green); }
+    .pill-low      { background: rgba(6,214,160,0.15); border: 1px solid rgba(6,214,160,0.4); color: var(--green); }
     .pill-info     { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); }
 
-    /* ===== SECTION TITLE ===== */
-    .section-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 10px;
-    }
-    .slide-title {
-      font-size: 2rem;
-      font-weight: 900;
-      color: #fff;
-      margin: 0 0 32px;
-      line-height: 1.2;
-    }
+    /* COMMON */
+    .section-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+    .slide-title { font-size: 1.9rem; font-weight: 900; color: #fff; margin: 0 0 28px; line-height: 1.2; }
 
-    /* ===== ASSET CARDS ===== */
-    .asset-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .asset-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: left;
-    }
-    .asset-icon { font-size: 1.6rem; margin-bottom: 10px; }
-    .asset-name { font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .asset-desc { font-size: 0.65rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+    /* ASSET GRID */
+    .asset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .asset-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; }
+    .asset-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .asset-name { font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .asset-desc { font-size: 0.62rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
 
-    /* ===== FINDING SLIDE ===== */
-    .finding-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .sev-badge {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 5px 14px;
-      border-radius: 100px;
-    }
+    /* FINDING */
+    .finding-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .sev-badge { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; padding: 5px 14px; border-radius: 100px; }
     .sev-critical { background: rgba(255,59,92,0.2); color: var(--red); border: 1px solid rgba(255,59,92,0.4); }
     .sev-high     { background: rgba(255,140,66,0.2); color: var(--orange); border: 1px solid rgba(255,140,66,0.4); }
-    .sev-medium   { background: rgba(255,209,102,0.2); color: var(--yellow); border: 1px solid rgba(255,209,102,0.4); }
-    .finding-title {
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: #fff;
+    .finding-title { font-size: 1.35rem; font-weight: 900; color: #fff; }
+    .finding-body { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px 22px; margin-bottom: 12px; }
+    .finding-label { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
+    .finding-text { font-size: 0.82rem; color: rgba(255,255,255,0.85); line-height: 1.65; }
+    .finding-text.danger { color: var(--red); }
+    .finding-impact { background: rgba(255,59,92,0.06); border: 1px solid rgba(255,59,92,0.2); border-radius: 12px; padding: 14px 18px; font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .finding-impact strong { color: var(--red); }
+    .finding-impact .impact-num { color: var(--orange); font-weight: 700; }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      overflow-x: auto;
     }
-    .finding-body {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px 28px;
-      margin-bottom: 16px;
-    }
-    .finding-label {
-      font-size: 0.6rem;
+    .code-block .code-label {
+      font-size: 0.55rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
+      color: var(--green);
       margin-bottom: 8px;
     }
-    .finding-text {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.7;
-    }
-    .finding-text.danger { color: var(--red); }
-    .finding-impact {
-      background: rgba(255,59,92,0.06);
-      border: 1px solid rgba(255,59,92,0.2);
-      border-radius: 14px;
-      padding: 16px 20px;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.6;
-    }
-    .finding-impact strong { color: var(--red); }
-
-    /* ===== POSITIVE SLIDE ===== */
-    .positive-list {
-      list-style: none;
-      padding: 0;
+    .code-block pre {
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .positive-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 20px;
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.5;
-    }
-    .check-icon {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      background: rgba(6,214,160,0.15);
-      border: 1px solid rgba(6,214,160,0.4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      margin-top: 1px;
-    }
-
-    /* ===== ROADMAP ===== */
-    .roadmap-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .roadmap-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
-    }
-    .roadmap-phase {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .phase-1 { color: var(--red); }
-    .phase-2 { color: var(--orange); }
-    .phase-3 { color: var(--yellow); }
-    .phase-4 { color: var(--green); }
-    .roadmap-title {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .roadmap-items {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .roadmap-items li {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.62rem;
-      color: rgba(255,255,255,0.5);
-      padding-left: 12px;
-      position: relative;
-      line-height: 1.5;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+      white-space: pre;
     }
-    .roadmap-items li::before {
-      content: "–";
-      position: absolute;
-      left: 0;
-      color: rgba(255,255,255,0.25);
-    }
-    .roadmap-effect {
-      margin-top: 12px;
-      font-size: 0.58rem;
-      font-weight: 700;
-      padding: 5px 10px;
-      border-radius: 8px;
-      text-align: center;
-    }
+    .code-block .kw { color: #c792ea; }
+    .code-block .str { color: #c3e88d; }
+    .code-block .cm { color: rgba(255,255,255,0.3); font-style: italic; }
+    .code-block .fn { color: #82aaff; }
+
+    /* MEDIUM/LOW TABLE (Slide 4.5) */
+    .ml-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
+    .ml-table thead tr { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .ml-table thead th { padding: 10px 14px; text-align: left; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .ml-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .ml-table tbody tr:last-child { border-bottom: none; }
+    .ml-table tbody td { padding: 11px 14px; color: rgba(255,255,255,0.7); vertical-align: top; line-height: 1.5; }
+    .ml-table tbody td:first-child { white-space: nowrap; }
+    .badge-medium { display: inline-block; background: rgba(255,209,102,0.15); color: var(--yellow); border: 1px solid rgba(255,209,102,0.3); border-radius: 6px; padding: 2px 8px; font-size: 0.58rem; font-weight: 700; }
+    .badge-low    { display: inline-block; background: rgba(6,214,160,0.12); color: var(--green); border: 1px solid rgba(6,214,160,0.3); border-radius: 6px; padding: 2px 8px; font-size: 0.58rem; font-weight: 700; }
+    .phase-tag { display: inline-block; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); border-radius: 6px; padding: 2px 8px; font-size: 0.58rem; font-weight: 600; }
+
+    /* POSITIVE */
+    .positive-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .positive-list li { display: flex; align-items: flex-start; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .check-icon { flex-shrink: 0; width: 20px; height: 20px; background: rgba(6,214,160,0.15); border: 1px solid rgba(6,214,160,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 1px; }
+
+    /* ROADMAP */
+    .roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .roadmap-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
+    .roadmap-phase { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .phase-1 { color: var(--red); } .phase-2 { color: var(--orange); } .phase-3 { color: var(--yellow); } .phase-4 { color: var(--green); }
+    .roadmap-title { font-size: 0.76rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .roadmap-items { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+    .roadmap-items li { font-size: 0.6rem; color: rgba(255,255,255,0.5); padding-left: 10px; position: relative; line-height: 1.45; }
+    .roadmap-items li::before { content: "–"; position: absolute; left: 0; color: rgba(255,255,255,0.2); }
+    .roadmap-effect { margin-top: 10px; font-size: 0.56rem; font-weight: 700; padding: 4px 8px; border-radius: 7px; text-align: center; }
     .effect-1 { background: rgba(255,59,92,0.12); color: var(--red); }
     .effect-2 { background: rgba(255,140,66,0.12); color: var(--orange); }
     .effect-3 { background: rgba(255,209,102,0.12); color: var(--yellow); }
     .effect-4 { background: rgba(6,214,160,0.12); color: var(--green); }
 
-    /* ===== CTA SLIDE ===== */
-    .cta-title {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
+    /* CTA */
+    .cta-title { font-size: 2.4rem; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 18px; }
     .cta-title .accent { color: var(--green); }
-    .cta-body {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.8;
-      margin-bottom: 32px;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: var(--green);
-      color: #0d0d0d;
-      font-weight: 900;
-      font-size: 0.85rem;
-      padding: 14px 36px;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-    }
-    .powered {
-      margin-top: 20px;
-      font-size: 0.6rem;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
+    .cta-body { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.85; margin-bottom: 28px; }
+    .cta-btn { display: inline-block; background: var(--green); color: #0d0d0d; font-weight: 900; font-size: 0.85rem; padding: 13px 34px; border-radius: 100px; text-decoration: none; letter-spacing: 0.04em; }
+    .powered { margin-top: 18px; font-size: 0.58rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; text-transform: uppercase; }
 
-    /* ===== DISCLAIMER ===== */
-    .disclaimer-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px 32px;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.9;
-      text-align: left;
-    }
-
-    /* ===== ANIMATIONS ===== */
-    .reveal .slides section .fragment.fade-up {
-      transform: translateY(20px);
-    }
+    /* DISCLAIMER */
+    .disclaimer-box { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 26px 30px; font-size: 0.7rem; color: rgba(255,255,255,0.4); line-height: 1.9; }
   </style>
 </head>
 <body>
@@ -365,7 +175,7 @@
 
     <!-- ① 表紙 -->
     <section>
-      <div class="slide-inner" style="align-items:flex-start; text-align:left;">
+      <div class="slide-inner" style="align-items:flex-start;">
         <div class="cover-badge">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Security Audit Report
@@ -373,21 +183,20 @@
         <h1 class="cover-title">Kodaira Connect<br /><span>セキュリティ診断レポート</span></h1>
         <p class="cover-meta">
           対象URL：<strong>https://kodaira-connect.vercel.app</strong><br />
-          診断日：<strong>2026年05月03日</strong><br />
+          診断日：<strong>2026年05月04日</strong><br />
           業種：<strong>その他（地域活性化プラットフォーム）</strong>
         </p>
-        <p class="powered" style="margin-top:36px; color:rgba(255,255,255,0.2); font-size:0.6rem; letter-spacing:0.12em;">POWERED BY ALNAIR INTELLIGENCE AGENCY</p>
+        <p class="powered" style="margin-top:32px;">POWERED BY ALNAIR INTELLIGENCE AGENCY</p>
       </div>
     </section>
 
     <!-- ② 総合リスクスコア -->
     <section>
       <div class="slide-inner" style="align-items:center; text-align:center;">
-        <div class="section-label">STEP 2 — RISK SCORE</div>
+        <div class="section-label">RISK SCORE</div>
         <div class="score-ring">
           <svg width="180" height="180" viewBox="0 0 180 180">
             <circle cx="90" cy="90" r="78" stroke="rgba(255,255,255,0.07)" stroke-width="12" fill="none"/>
-            <!-- 43/100 = 43% → circumference ≈ 490 → dash = 490 * 0.43 ≈ 211 -->
             <circle cx="90" cy="90" r="78" stroke="#ff3b5c" stroke-width="12" fill="none"
               stroke-dasharray="211 279" stroke-linecap="round"/>
           </svg>
@@ -410,44 +219,20 @@
     <!-- ③ 御社サイトが預かっているもの -->
     <section>
       <div class="slide-inner">
-        <div class="section-label">STEP 3 — ASSETS AT RISK</div>
+        <div class="section-label">ASSETS AT RISK</div>
         <h2 class="slide-title">このサイトが預かっているもの</h2>
         <div class="asset-grid">
-          <div class="asset-card">
-            <div class="asset-icon">👥</div>
-            <div class="asset-name">地域サポーター名簿</div>
-            <div class="asset-desc">個人名・活動履歴・タグ情報が管理画面に格納。現在は認証なしで公開中。</div>
-          </div>
-          <div class="asset-card">
-            <div class="asset-icon">📋</div>
-            <div class="asset-name">役所書類・生成データ</div>
-            <div class="asset-desc">事務自動化機能で生成される行政文書や申請データ。</div>
-          </div>
-          <div class="asset-card">
-            <div class="asset-icon">🎪</div>
-            <div class="asset-name">イベント・マルシェ情報</div>
-            <div class="asset-desc">出店者情報・協賛企業・スケジュール等の運営データ。</div>
-          </div>
-          <div class="asset-card">
-            <div class="asset-icon">🏢</div>
-            <div class="asset-name">協賛スポンサー情報</div>
-            <div class="asset-desc">地域事業者・協賛金額・取引関係の機密性の高いデータ。</div>
-          </div>
-          <div class="asset-card">
-            <div class="asset-icon">👶</div>
-            <div class="asset-name">子育て支援利用者情報</div>
-            <div class="asset-desc">Pica-Beans・Play Park の保護者・子ども情報。要配慮個人情報に該当する可能性あり。</div>
-          </div>
-          <div class="asset-card">
-            <div class="asset-icon">📨</div>
-            <div class="asset-name">問い合わせ・相談データ</div>
-            <div class="asset-desc">Tomarigi AIへの健康・育児相談内容。高度な機密性を持つ。</div>
-          </div>
+          <div class="asset-card"><div class="asset-icon">👥</div><div class="asset-name">地域サポーター名簿</div><div class="asset-desc">個人名・活動履歴・タグ情報。現在は認証なしで公開中。</div></div>
+          <div class="asset-card"><div class="asset-icon">📋</div><div class="asset-name">役所書類・生成データ</div><div class="asset-desc">事務自動化機能で生成される行政文書・申請データ。</div></div>
+          <div class="asset-card"><div class="asset-icon">🎪</div><div class="asset-name">イベント・マルシェ情報</div><div class="asset-desc">出店者情報・協賛企業・スケジュール等の運営データ。</div></div>
+          <div class="asset-card"><div class="asset-icon">🏢</div><div class="asset-name">協賛スポンサー情報</div><div class="asset-desc">地域事業者・協賛金額・取引関係の機密データ。</div></div>
+          <div class="asset-card"><div class="asset-icon">👶</div><div class="asset-name">子育て支援利用者情報</div><div class="asset-desc">Pica-Beans・Play Park の保護者・子ども情報。要配慮個人情報に該当する可能性あり。</div></div>
+          <div class="asset-card"><div class="asset-icon">📨</div><div class="asset-name">問い合わせ・相談データ</div><div class="asset-desc">Tomarigi AIへの健康・育児相談内容。高度な機密性を持つ。</div></div>
         </div>
       </div>
     </section>
 
-    <!-- ④-1 Critical: /admin認証なし -->
+    <!-- ④-1 Critical: /admin 認証なし -->
     <section>
       <div class="slide-inner">
         <div class="finding-header">
@@ -455,18 +240,23 @@
           <span class="finding-title">管理画面が認証なしで公開されている</span>
         </div>
         <div class="finding-body">
-          <div class="finding-label">現状 — 今どういう状態か</div>
-          <p class="finding-text danger">
-            金庫の鍵番号を、正面玄関のガラスに貼り出している状態。<br />
-            <small style="color:rgba(255,255,255,0.45);">/admin にアクセスするだけで、地域サポーターの個人名・活動履歴・タグ情報が誰でも閲覧可能。ログイン不要。</small>
-          </p>
+          <div class="finding-label">現状</div>
+          <p class="finding-text danger">金庫の鍵番号を、正面玄関のガラスに貼り出している状態。<br />
+          <small style="color:rgba(255,255,255,0.4);">/admin にアクセスするだけで個人名・活動履歴が誰でも閲覧可能。ログイン不要。</small></p>
         </div>
-        <div class="finding-body" style="margin-bottom:16px;">
-          <div class="finding-label">あるべき姿</div>
-          <p class="finding-text">管理画面は認証（ログイン）を必須とし、権限のあるユーザーのみアクセス可能にする。</p>
+        <div class="code-block">
+          <div class="code-label">修正コード例 — middleware.ts（Next.js / NextAuth）</div>
+          <pre><span class="cm">// middleware.ts — /admin 以下を認証必須にする</span>
+<span class="kw">export</span> { <span class="fn">default</span> } <span class="kw">from</span> <span class="str">'next-auth/middleware'</span>;
+
+<span class="kw">export const</span> config = {
+  matcher: [<span class="str">'/admin/:path*'</span>],
+};</pre>
         </div>
         <div class="finding-impact">
-          <strong>ビジネスインパクト：</strong>個人情報保護法違反リスク。地域住民の個人情報が第三者に漏洩した場合、プロジェクトへの信頼失墜・行政との関係破綻につながる。発覚次第、即日対応が必要。
+          <strong>ビジネスインパクト：</strong>個人情報保護法違反リスク。
+          <span class="impact-num">法人への罰金：最大1億円以下</span>、行政指導・事業停止の可能性。
+          地域住民の信頼失墜は金額換算不能な損失につながる。
         </div>
       </div>
     </section>
@@ -479,18 +269,29 @@
           <span class="finding-title">CSP（コンテンツセキュリティポリシー）未設定</span>
         </div>
         <div class="finding-body">
-          <div class="finding-label">現状 — 今どういう状態か</div>
-          <p class="finding-text">
-            防犯カメラ・センサー・防火扉の電源が全てOFFの状態。<br />
-            <small style="color:rgba(255,255,255,0.45);">悪意あるスクリプトをサイトに埋め込むXSS攻撃を防ぐ仕組みが存在しない。利用者のブラウザ上で任意のコードが実行される可能性がある。</small>
-          </p>
+          <div class="finding-label">現状</div>
+          <p class="finding-text">防犯カメラ・センサー・防火扉の電源が全てOFFの状態。<br />
+          <small style="color:rgba(255,255,255,0.4);">悪意あるスクリプト（XSS）の埋め込みを防ぐ仕組みが存在しない。</small></p>
         </div>
-        <div class="finding-body" style="margin-bottom:16px;">
-          <div class="finding-label">あるべき姿</div>
-          <p class="finding-text">レスポンスヘッダーに <code style="color:var(--yellow); font-size:0.75rem;">Content-Security-Policy</code> を設定し、許可するリソースの読み込み元を制限する。</p>
+        <div class="code-block">
+          <div class="code-label">修正コード例 — next.config.js</div>
+          <pre><span class="cm">// next.config.js</span>
+<span class="kw">const</span> securityHeaders = [
+  { key: <span class="str">'Content-Security-Policy'</span>,
+    value: <span class="str">"default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:;"</span> },
+  { key: <span class="str">'X-Frame-Options'</span>,        value: <span class="str">'SAMEORIGIN'</span> },
+  { key: <span class="str">'X-Content-Type-Options'</span>,  value: <span class="str">'nosniff'</span> },
+  { key: <span class="str">'Referrer-Policy'</span>,         value: <span class="str">'strict-origin-when-cross-origin'</span> },
+];
+<span class="kw">module.exports</span> = {
+  <span class="kw">async</span> <span class="fn">headers</span>() {
+    <span class="kw">return</span> [{ source: <span class="str">'/(.*)'</span>, headers: securityHeaders }];
+  },
+};</pre>
         </div>
         <div class="finding-impact">
-          <strong>ビジネスインパクト：</strong>利用者の個人情報・セッション情報の窃取リスク。地域住民がサイトを訪問するだけでマルウェアに感染する経路になりうる。
+          <strong>ビジネスインパクト：</strong>利用者のブラウザ上で任意コードが実行されるリスク。
+          フィッシング被害発生時、<span class="impact-num">企業の信頼回復コスト：最低数百万円〜</span>。
         </div>
       </div>
     </section>
@@ -503,19 +304,70 @@
           <span class="finding-title">X-Frame-Options 未設定（クリックジャッキング）</span>
         </div>
         <div class="finding-body">
-          <div class="finding-label">現状 — 今どういう状態か</div>
-          <p class="finding-text">
-            看板を偽物に差し替えて来客を誘導できる状態。<br />
-            <small style="color:rgba(255,255,255,0.45);">別サイトにこのサイトを透明なフレームとして埋め込み、利用者が意図しない操作をさせる「クリックジャッキング」攻撃が可能な状態。</small>
-          </p>
+          <div class="finding-label">現状</div>
+          <p class="finding-text">看板を偽物に差し替えて来客を誘導できる状態。<br />
+          <small style="color:rgba(255,255,255,0.4);">別サイトに透明フレームとして埋め込み、意図しない操作をさせる攻撃が可能。</small></p>
         </div>
-        <div class="finding-body" style="margin-bottom:16px;">
-          <div class="finding-label">あるべき姿</div>
-          <p class="finding-text">レスポンスヘッダーに <code style="color:var(--yellow); font-size:0.75rem;">X-Frame-Options: SAMEORIGIN</code> を設定する。</p>
+        <div class="code-block">
+          <div class="code-label">修正コード例 — next.config.js（上記と同じブロックに追記）</div>
+          <pre><span class="cm">// ↑の securityHeaders 配列にすでに含まれています</span>
+{ key: <span class="str">'X-Frame-Options'</span>, value: <span class="str">'SAMEORIGIN'</span> }
+
+<span class="cm">// または CSP の frame-ancestors ディレクティブで制御</span>
+{ key: <span class="str">'Content-Security-Policy'</span>,
+  value: <span class="str">"frame-ancestors 'self';"</span> }</pre>
         </div>
         <div class="finding-impact">
-          <strong>ビジネスインパクト：</strong>フィッシング詐欺・偽サイトへの誘導に悪用される可能性。地域住民が騙されるリスク。
+          <strong>ビジネスインパクト：</strong>フィッシング詐欺・偽サイトへの誘導に悪用される可能性。
+          <span class="impact-num">顧客1人あたりの被害額：平均数十万円</span>。地域住民への被害拡大リスク。
         </div>
+      </div>
+    </section>
+
+    <!-- ④.5 Medium・Low 一覧 -->
+    <section>
+      <div class="slide-inner">
+        <div class="section-label">MEDIUM · LOW — FULL LIST</div>
+        <h2 class="slide-title" style="font-size:1.5rem; margin-bottom:20px;">その他の指摘事項（Medium / Low）</h2>
+        <table class="ml-table">
+          <thead>
+            <tr>
+              <th>区分</th>
+              <th>項目名</th>
+              <th>一言説明</th>
+              <th>対応フェーズ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge-medium">Medium</span></td>
+              <td style="color:#fff; font-weight:600;">X-Content-Type-Options 未設定</td>
+              <td>ブラウザがコンテンツタイプを推測・実行するMIMEスニッフィング攻撃を防げない状態</td>
+              <td><span class="phase-tag">Phase 2（1ヶ月）</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge-medium">Medium</span></td>
+              <td style="color:#fff; font-weight:600;">Referrer-Policy 未設定</td>
+              <td>リンク先に参照元URLが漏洩し、内部パス・パラメータが第三者に伝わる可能性</td>
+              <td><span class="phase-tag">Phase 2（1ヶ月）</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge-medium">Medium</span></td>
+              <td style="color:#fff; font-weight:600;">CORS ワイルドカード（*）</td>
+              <td>全オリジンからのクロスオリジンリクエストを許可。不要な範囲まで開放している状態</td>
+              <td><span class="phase-tag">Phase 3（3ヶ月）</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge-low">Low</span></td>
+              <td style="color:#fff; font-weight:600;">デプロイID の HTML 属性露出</td>
+              <td><code style="font-size:0.6rem; color:rgba(255,255,255,0.5);">data-dpl-id</code> 属性でVercelデプロイIDが公開。攻撃者の情報収集に利用される可能性</td>
+              <td><span class="phase-tag">Phase 3（3ヶ月）</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.62rem; color:rgba(255,255,255,0.25); margin-top:16px; text-align:right;">
+          ※ Medium / Low は即時対応不要。ロードマップに沿って計画的に対応。
+        </p>
       </div>
     </section>
 
@@ -523,27 +375,27 @@
     <section>
       <div class="slide-inner">
         <div class="section-label">POSITIVE FINDINGS</div>
-        <h2 class="slide-title">できていること<br /><small style="font-size:0.55em; color:rgba(255,255,255,0.4);">建て直しではなく、補強で済む状態です</small></h2>
+        <h2 class="slide-title">できていること<br /><small style="font-size:0.52em; color:rgba(255,255,255,0.35);">建て直しではなく、補強で済む状態です</small></h2>
         <ul class="positive-list">
           <li>
             <span class="check-icon">✓</span>
             <div><strong style="color:#fff;">HTTPS 完全対応・HSTS 設定済み</strong><br />
-            <span style="font-size:0.75rem; color:rgba(255,255,255,0.45);">max-age=63072000（約2年）、includeSubDomains・preload 対応。通信の暗号化は万全。</span></div>
+            <span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">max-age=63072000（約2年）、includeSubDomains・preload 対応。通信の暗号化は万全。</span></div>
           </li>
           <li>
             <span class="check-icon">✓</span>
             <div><strong style="color:#fff;">SSL 証明書 有効（Google Trust Services 発行）</strong><br />
-            <span style="font-size:0.75rem; color:rgba(255,255,255,0.45);">期限：2026年7月27日。自動更新仕組みがあれば問題なし。</span></div>
+            <span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">期限：2026年7月27日。Vercel の自動更新で継続管理可能。</span></div>
           </li>
           <li>
             <span class="check-icon">✓</span>
             <div><strong style="color:#fff;">.git / .env ファイルの外部露出なし</strong><br />
-            <span style="font-size:0.75rem; color:rgba(255,255,255,0.45);">ソースコードや環境変数（APIキー等）へのアクセスはブロックされている。</span></div>
+            <span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">ソースコードや環境変数（APIキー等）へのアクセスはブロックされている。</span></div>
           </li>
           <li>
             <span class="check-icon">✓</span>
             <div><strong style="color:#fff;">WordPress 非使用・CMS版数漏洩なし</strong><br />
-            <span style="font-size:0.75rem; color:rgba(255,255,255,0.45);">Next.js ベースで構築。WordPress の既知脆弱性リスクはゼロ。</span></div>
+            <span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">Next.js ベース構成。WordPress の既知脆弱性リスクはゼロ。</span></div>
           </li>
         </ul>
       </div>
@@ -559,7 +411,7 @@
             <div class="roadmap-phase phase-1">Phase 1 — 今すぐ</div>
             <div class="roadmap-title">緊急対応<br /><small style="font-size:0.7em; opacity:0.5;">1週間以内</small></div>
             <ul class="roadmap-items">
-              <li>/admin 認証実装（NextAuth等）</li>
+              <li>/admin 認証実装（NextAuth）</li>
               <li>アクセスを関係者のみに制限</li>
             </ul>
             <div class="roadmap-effect effect-1">リスク -20pt 改善</div>
@@ -568,9 +420,9 @@
             <div class="roadmap-phase phase-2">Phase 2 — 短期</div>
             <div class="roadmap-title">ヘッダー強化<br /><small style="font-size:0.7em; opacity:0.5;">1ヶ月以内</small></div>
             <ul class="roadmap-items">
-              <li>CSP 設定</li>
+              <li>next.config.js にCSP設定</li>
               <li>X-Frame-Options 設定</li>
-              <li>X-Content-Type-Options 設定</li>
+              <li>X-Content-Type-Options</li>
               <li>Referrer-Policy 設定</li>
             </ul>
             <div class="roadmap-effect effect-2">リスク -25pt 改善</div>
@@ -581,7 +433,7 @@
             <ul class="roadmap-items">
               <li>CORS ポリシー見直し</li>
               <li>meta タグ・OGP 整備</li>
-              <li>独自ドメイン＋SPF/DMARC設定</li>
+              <li>独自ドメイン＋SPF/DMARC</li>
             </ul>
             <div class="roadmap-effect effect-3">リスク -10pt 改善</div>
           </div>
@@ -601,12 +453,12 @@
 
     <!-- ⑦ Alnairのご提案 -->
     <section>
-      <div class="slide-inner" style="align-items:flex-start; text-align:left;">
+      <div class="slide-inner" style="align-items:flex-start;">
         <div class="section-label">ALNAIR PROPOSAL</div>
-        <h2 class="cta-title">発見して、<br />終わりにしません。<span class="accent">。</span></h2>
+        <h2 class="cta-title">発見して、<br />終わりにしません<span class="accent">。</span></h2>
         <p class="cta-body">
           診断レポートをお渡しして「あとはご自身でどうぞ」—それがAlnairのやり方ではありません。<br />
-          改修設計・実装・再診断まで、AI顧問として伴走します。<br /><br />
+          改修設計・実装（next.config.js 修正・認証実装）・再診断まで、AI顧問として伴走します。<br /><br />
           まずは1時間、無料でお話しましょう。
         </p>
         <a class="cta-btn" href="mailto:u2kvviiuueeu2k@gmail.com">無料相談を予約する →</a>
@@ -618,16 +470,14 @@
     <section>
       <div class="slide-inner">
         <div class="section-label">DISCLAIMER</div>
-        <h2 class="slide-title" style="font-size:1.4rem;">免責事項</h2>
+        <h2 class="slide-title" style="font-size:1.3rem;">免責事項</h2>
         <div class="disclaimer-box">
           <p>本レポートは、外部から観測可能な範囲（HTTPレスポンスヘッダー・公開パス・DNS設定・SSL証明書情報）のみを対象とした表面診断に基づいています。</p>
           <br />
-          <p>以下は本診断の対象外です：</p>
-          <p>・ソースコードの内部レビュー<br />
-          ・内部ネットワーク・データベースへのアクセス<br />
-          ・脆弱性を悪用した侵入テスト（ペネトレーションテスト）</p>
+          <p>以下は本診断の対象外です：<br />
+          ・ソースコードの内部レビュー　・内部ネットワーク・データベースへのアクセス　・脆弱性を悪用した侵入テスト（ペネトレーションテスト）</p>
           <br />
-          <p>本レポートの内容は診断日時点（2026年05月03日）の状態に基づくものであり、その後の変更を保証するものではありません。</p>
+          <p>本レポートの内容は診断日時点（2026年05月04日）の状態に基づくものであり、その後の変更を保証するものではありません。</p>
         </div>
       </div>
     </section>
